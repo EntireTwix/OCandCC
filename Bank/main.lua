@@ -33,6 +33,8 @@ function Request(params)
         response = server:RemoveUser(params[2], params[3])
     elseif (params[1] == "SendFunds") and (TypeChecking({"string", "number", "number", "number", "string"}, params)) then
         response = server:SendFunds(params[2], params[3], params[4], params[5])
+    elseif (params[1] == "Lookup") and TypeChecking({"string", "number"}, params)) then
+        response = server:Lookup(params[2])
     end
 
     return response
