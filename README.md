@@ -11,10 +11,10 @@ a bank program to be ran on a OpenComputers server, the goal of this program is 
 * send funds
 
 ### Bank Owners can:
-* inflate the economy
 * add/remove accounts
 
 ### Server:
+* inflate the economy
 * loading and saving of accounts from txt file
 * packets sent to the server are type checked as to prevent the program from crashing upon invalid input
 
