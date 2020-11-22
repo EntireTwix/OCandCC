@@ -8,11 +8,6 @@ function Bank:new(server_name, password)
     temp.name = server_name
     return temp
 end
-function Bank:Inflate(rate)
-    for k, v in pairs(self.customers) do
-        v:AddMoney(usr:GetBal() * rate)
-    end
-end
 function Bank:ListUsers()
     local res = ""
     for k, v in pairs(self.customers) do
