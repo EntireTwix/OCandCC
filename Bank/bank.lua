@@ -11,7 +11,7 @@ end
 function Bank:ListUsers()
     local res = ""
     for k, v in pairs(self.customers) do
-        res = res..k..':'..v:GetUsr()..", "
+        res = res..v:Info()..'\n'
     end
     return res
 end
