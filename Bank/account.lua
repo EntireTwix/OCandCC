@@ -39,4 +39,4 @@ function compare(a, b)
 end
 
 GlobalMembers = {}
-GlobalMembers.idCounter = 0
+GlobalMembers.idCounter = 1
