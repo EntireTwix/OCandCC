@@ -62,12 +62,13 @@ function main()
     --loop starts
     while true do 
         --wait for request
+        local _, _, _, replyChannel, payload, distance = os.pullEvent("modem_message")
         local _, _, remoteAddress, _, distance, payload = os.pullEvent("modem_message")
         payload = serialization.unserialize(payload)  
         if type(payload) == "table" then  
 
             print("valid input from "..remoteAddress)
-            m.send(remoteAddress, 11, Request(payload))
+            m.transmit(replyChannel, 1111, Request(payload))
             print("response sent")
         else
             print("invalid input from "..remoteAddress)
