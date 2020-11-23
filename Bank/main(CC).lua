@@ -4,7 +4,6 @@ local m = peripheral.wrap( "top" )
 
 local bankName = "BankName"
 local server = Bank:new(bankName, "root")
-m.open(1111)
 
 function TypeChecking(type_table, argument_table)
     if #argument_table ~= #type_table then
@@ -64,11 +63,16 @@ function main()
     while true do 
         --wait for request
         --print("wainting for request")
-        local _, _, _, replyChannel, payload, distance = os.pullEvent("modem_message")  
+        m.open(1111)
+        local _, _, _, replyChannel, _, _ = os.pullEvent("modem_message")  
+        m.close(1111)
         --print("got input")
-        if replyChannel == 1111 then
-            payload = nil
-        end
+        local p = math.random(65535)
+        m.open(p)
+        m.transmit(replyChannel, p, "working port")
+        local _,_,_,replyChannel,payload, _ = os.pullEvent("modem_message", 1)
+        m.close(p)
+        
         if type(payload) == "table" then  
             
             --print("valid input from somebody")
