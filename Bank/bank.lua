@@ -31,7 +31,7 @@ function Bank:AddUser(username, password, balance, adminPassword)
         return "invalid password"
     end
     local temp = Account.new(username, password, balance)
-    self.customers[temp:GetID()] = temp
+    self.customers[temp:GetID()-1] = temp
     return "User Added"
 end
 function Bank:RemoveUser(userID, adminPassword)
