@@ -61,27 +61,35 @@ function main()
  
     --loop starts
     while true do 
-        --wait for request
-        --print("wainting for request")
+        --wait for ping
         m.open(1111)
+        print("opening 1111")
         local _, _, _, replyChannel, _, _ = os.pullEvent("modem_message")  
+        print("recieved packet")
         m.close(1111)
-        --print("got input")
+        
+        --obfuscation
         local p = math.random(65535)
         m.open(p)
+        print("opened "..p)
         m.transmit(replyChannel, p, "working port")
+        print("transmited on "..replyChannel.." with reply on "..p)
         local _,_,_,replyChannel,payload, _ = os.pullEvent("modem_message", 1)
+        print("recieved on "..p.." reply will be to "..replyChannel) 
+        print("closing "..p)
         m.close(p)
         
+        --reply
+        print("parsing input")
         if type(payload) == "table" then  
             
-            --print("valid input from somebody")
+            print("valid input from somebody")
             m.transmit(replyChannel, 1111, Request(payload))
         else
-            --print("invalid input from somebody")
+            print("invalid input from somebody")
             m.transmit(replyChannel, 1111, "input type must be a table") 
         end
-        --print("response sent")
+        print("response sent")
     end
 end
 
