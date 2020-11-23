@@ -50,7 +50,7 @@ end
 function main()
    
     --load 
-    print("loading") 
+    --print("loading") 
     local file = fs.open(bankName..".txt", "r")
     server.customers = serialization.unserialise(file.readAll()) or {}
     file:close() 
@@ -63,18 +63,18 @@ function main()
     --loop starts
     while true do 
         --wait for request
-        print("wainting for request")
+        --print("wainting for request")
         local _, _, _, replyChannel, payload, distance = os.pullEvent("modem_message")  
-        print("got input")
+        --print("got input")
         if type(payload) == "table" then  
             
-            print("valid input from somebody")
+            --print("valid input from somebody")
             m.transmit(replyChannel, 1111, Request(payload))
         else
-            print("invalid input from somebody")
+            --print("invalid input from somebody")
             m.transmit(replyChannel, 1111, "input type must be a table") 
         end
-        print("response sent")
+        --print("response sent")
     end
 end
 
