@@ -18,9 +18,10 @@ end
 function Bank:BalRanked()
     local temp = {}
     local res = ""
-    temp = self.customers
+    
+    for _, v in pairs(self.customers) do table.insert(temp, v) end
     table.sort(temp, compare)
-    for k, v in pairs(temp) do
+    for _,v in pairs(temp) do 
         res = res..v:Info()..'\n'
     end
     return res;
