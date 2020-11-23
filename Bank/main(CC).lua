@@ -21,7 +21,7 @@ end
 
 function Save()
     local file = io.open(bankName..".txt", "w")
-    file:write(serialization.serialize(server.customers))
+    file:write(serialization.serialise(server.customers))
     file:close()   
 end
 
@@ -49,9 +49,10 @@ end
 
 function main()
    
-    --load  
+    --load 
+    print("loading") 
     local file = fs.open(bankName..".txt", "r")
-    server.customers = serialization.unserialize(file.readLine()) or {}
+    server.customers = serialization.unserialise(file.readLine()) or {}
     file:close() 
 
     for k, usr in pairs(server.customers) do
@@ -62,16 +63,17 @@ function main()
     --loop starts
     while true do 
         --wait for request
+        print("wainting for request")
         local _, _, _, replyChannel, payload, distance = os.pullEvent("modem_message")
-        local _, _, remoteAddress, _, distance, payload = os.pullEvent("modem_message")
-        payload = serialization.unserialize(payload)  
+        payload = serialization.unserialise(payload)  
+        print("got input")
         if type(payload) == "table" then  
-
+            
             print("valid input from "..remoteAddress)
             m.transmit(replyChannel, 1111, Request(payload))
             print("response sent")
         else
-            print("invalid input from "..remoteAddress)
+            print("invalid input from somebody")
         end
     end
 end
