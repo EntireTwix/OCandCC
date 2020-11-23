@@ -52,7 +52,7 @@ function main()
     --load 
     print("loading") 
     local file = fs.open(bankName..".txt", "r")
-    server.customers = serialization.unserialise(file.readLine()) or {}
+    server.customers = serialization.unserialise(file.readAll()) or {}
     file:close() 
 
     for k, usr in pairs(server.customers) do
@@ -70,10 +70,11 @@ function main()
             
             print("valid input from somebody")
             m.transmit(replyChannel, 1111, Request(payload))
-            print("response sent")
         else
             print("invalid input from somebody")
+            m.transmit(replyChannel, 1111, "input type must be a table") 
         end
+        print("response sent")
     end
 end
 
