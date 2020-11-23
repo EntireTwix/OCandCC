@@ -21,6 +21,12 @@ function TypeChecking(type_table, argument_table)
     return true
 end
 
+function Save()
+    local file = io.open("/home/"..bankName..".txt", "w")
+    file:write(serialization.serialize(server.customers))
+    file:close()   
+end
+
 function Request(params)
     local response = "invalid parameters"
     if (params[1] == "ListUsers") then
@@ -29,10 +35,13 @@ function Request(params)
         response = server:BalRanked()
     elseif (params[1] == "AddUser") and (TypeChecking({"string", "string", "string", "number", "string"}, params)) then
         response = server:AddUser(params[2], params[3], params[4], params[5])
+        Save()
     elseif (params[1] == "RemoveUser") and (TypeChecking({"string", "number", "string"}, params)) then
         response = server:RemoveUser(params[2], params[3])
+        Save()
     elseif (params[1] == "SendFunds") and (TypeChecking({"string", "number", "number", "number", "string"}, params)) then
         response = server:SendFunds(params[2], params[3], params[4], params[5])
+        Save()
     elseif (params[1] == "Lookup") and TypeChecking({"string", "number"}, params)) then
         response = server:Lookup(params[2])
     end
@@ -57,10 +66,7 @@ function main()
         --wait for request
         local _, _, remoteAddress, _, distance, payload = event.pull("modem_message")
         payload = serialization.unserialize(payload)  
-        if type(payload) == "table" then
-            local file = io.open("/home/"..bankName..".txt", "w")
-            file:write(serialization.serialize(server.customers))
-            file:close()     
+        if type(payload) == "table" then  
 
             print("valid input from "..remoteAddress)
             m.send(remoteAddress, 11, Request(payload))
