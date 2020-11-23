@@ -66,6 +66,9 @@ function main()
         --print("wainting for request")
         local _, _, _, replyChannel, payload, distance = os.pullEvent("modem_message")  
         --print("got input")
+        if replyChannel == 1111 then
+            payload = nil
+        end
         if type(payload) == "table" then  
             
             --print("valid input from somebody")
