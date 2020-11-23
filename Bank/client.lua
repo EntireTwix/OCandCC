@@ -1,0 +1,13 @@
+local m = peripheral.wrap("back")
+local p = math.random(65535)
+m.open(p)
+m.transmit(1111, p, "ping")
+local _,_,_,rc,message,_ = os.pullEvent("modem_message")
+m.close(p)
+local p = math.random(65535)
+m.open(p)
+m.transmit(rc, p, {"ListUsers"})
+local _,_,_,rc,message,_ = os.pullEvent("modem_message")
+m.close(p)
+
+print(message)
