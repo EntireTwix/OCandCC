@@ -1,7 +1,7 @@
 # OC/CC
 a small repo for OpenComputers and ComputerCraft programs, both of which are mods that add programming to Minecraft in the form of the scripting language Lua
 
-# Bank (OC)
+# Bank (BOTH)
 a bank program to be ran on a OpenComputers server, the goal of this program is to provide utility to a minecraft servers society, it aims to fill the problems with fiate currencies such as gold ingots or dianmonds.
 
 ### Clients can:
