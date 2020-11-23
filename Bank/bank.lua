@@ -11,17 +11,20 @@ end
 function Bank:ListUsers()
     local res = ""
     for k, v in pairs(self.customers) do
-        res = res..v:Info()..'\n'
+        res = res..k..':'..v:GetUsr()..", "
     end
     return res
+end
+function compare(a, b)
+    return a.bal > b.bal
 end
 function Bank:BalRanked()
     local temp = {}
     local res = ""
     
-    for _, v in pairs(self.customers) do table.insert(temp, v) end
+    for _,v in pairs(self.customers) do table.insert(temp, v) end
     table.sort(temp, compare)
-    for _,v in pairs(temp) do 
+    for _,v in pairs(temp) do
         res = res..v:Info()..'\n'
     end
     return res;
@@ -31,7 +34,7 @@ function Bank:AddUser(username, password, balance, adminPassword)
         return "invalid password"
     end
     local temp = Account.new(username, password, balance)
-    self.customers[temp:GetID()-1] = temp
+    self.customers[temp:GetID()] = temp
     return "User Added"
 end
 function Bank:RemoveUser(userID, adminPassword)
