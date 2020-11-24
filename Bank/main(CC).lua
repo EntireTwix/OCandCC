@@ -56,7 +56,9 @@ function main()
 
     for k, usr in pairs(server.customers) do
         setmetatable(usr, {__index = Account})
-        GlobalMembers.idCounter = usr:GetID()
+        if GlobalMembers.idCounter < usr:GetID() then
+            GlobalMembers.idCounter = usr:GetID()
+        end
     end
  
     --loop starts
