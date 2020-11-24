@@ -7,7 +7,7 @@ a bank program to be ran on a OpenComputers server, the goal of this program is 
 ### Clients can:
 * check an accounts balance
 * list accounts
-* balance leaderboards
+* balance based leaderboards
 * send funds
 
 ### Bank Owners can:
