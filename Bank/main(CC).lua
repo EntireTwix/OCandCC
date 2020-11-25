@@ -2,7 +2,7 @@ local bank = require("bank")
 local serialization = textutils
 local m = peripheral.wrap( "top" )
 
-local bankName = "BankName"
+local bankName = "twix_bank"
 local server = Bank:new(bankName, "root")
 
 function TypeChecking(type_table, argument_table)
@@ -41,6 +41,8 @@ function Request(params)
         Save()
     elseif (params[1] == "Lookup") and (TypeChecking({"string", "number"}, params)) then
         response = server:Lookup(params[2])
+    elseif (params[1] == "VerifPass") and (TypeChecking({"string", "number", "string"}, params)) then
+        response = server:VerifPass(params[2], params[3]) 
     end
 
     return response
@@ -65,33 +67,33 @@ function main()
     while true do 
         --wait for ping
         m.open(1111)
-        print("opening 1111")
+        --print("opening 1111")
         local _, _, _, replyChannel, _, _ = os.pullEvent("modem_message")  
-        print("recieved packet")
+        --print("recieved packet")
         m.close(1111)
         
         --obfuscation
         local p = math.random(65535)
         m.open(p)
-        print("opened "..p)
+        --print("opened "..p)
         m.transmit(replyChannel, p, "working port")
-        print("transmited on "..replyChannel.." with reply on "..p)
+        --print("transmited on "..replyChannel.." with reply on "..p)
         local _,_,_,replyChannel,payload, _ = os.pullEvent("modem_message", 1)
-        print("recieved on "..p.." reply will be to "..replyChannel) 
-        print("closing "..p)
+        --print("recieved on "..p.." reply will be to "..replyChannel) 
+        --print("closing "..p)
         m.close(p)
         
         --reply
-        print("parsing input")
+        --print("parsing input")
         if type(payload) == "table" then  
             
-            print("valid input from somebody")
+            --print("valid input from somebody")
             m.transmit(replyChannel, 1111, Request(payload))
         else
-            print("invalid input from somebody")
+            --print("invalid input from somebody")
             m.transmit(replyChannel, 1111, "input type must be a table") 
         end
-        print("response sent")
+        --print("response sent")
     end
 end
 
