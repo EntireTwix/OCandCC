@@ -72,3 +72,8 @@ function Bank:Lookup(userID)
     end
     return "We do not have data for that number\n"
 end
+function Bank:VerifPass(userID, guess)
+    if self.customers[userID] ~= nil then
+        return self.customers[userID]:IsPassword(guess)
+    end
+end
