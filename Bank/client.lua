@@ -6,7 +6,8 @@ local commands = {
     {"SendFunds",{"amount", "from ID", "to ID", "from's password"}},
     {"Lookup",{"ID"}},
     {"AddUser",{"username", "password", "balance", "admin pass"}},
-    {"RemoveUser",{"ID", "root"}},
+    {"RemoveUser",{"ID", "admin pass"}},
+    {"VerifPass", {"ID", "password"}},
 }
     
 for k,v in pairs(commands) do
