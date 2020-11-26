@@ -7,7 +7,6 @@ local commands = {
     {"Lookup",{"ID"}},
     {"AddUser",{"username", "password", "balance", "admin pass"}},
     {"RemoveUser",{"ID", "admin pass"}},
-    {"VerifPass", {"ID", "password"}},
 }
     
 for k,v in pairs(commands) do
