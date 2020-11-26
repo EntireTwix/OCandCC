@@ -16,6 +16,7 @@ a bank program to be ran on a OpenComputers server, the goal of this program is 
 ### Server:
 * loading and saving of accounts from txt file
 * packets sent to the server are type checked as to prevent the program from crashing upon invalid input
+* verify password function for connected services
 
 the original version of this program had more features such as a frontend client side program to go with it, although the old server side code wasnt very clean so I decided to upload this version instead
 
