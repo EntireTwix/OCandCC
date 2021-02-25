@@ -8,4 +8,4 @@ this program is a defuse **ressistant** mine. Some of its prevetative measures i
 * remotly detonating if it recieves the proper message on a given port
 
 # TurtleScripts
-* a obsidian generator
+* an obsidian generator
