@@ -3,5 +3,6 @@
     "Item" : true,
     "plethora:laser" : true,
     "EnderDragon" : true,
-    "EnderCrystals" : true
+    "EnderCrystal" : true,
+    "Villager" : true
 }
