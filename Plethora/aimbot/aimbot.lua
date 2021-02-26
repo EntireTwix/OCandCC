@@ -8,7 +8,6 @@ if not modules.hasModule("plethora:laser", 0) then
 	error("Must have a laser", 0)
 end
 
-
 --filter out self
 print("Enter your Username")
 local name = io.read()
@@ -52,7 +51,7 @@ parallel.waitForAny(
     
                 --find nearest
                 table.sort(targets, function (a, b)
-                    return (math.abs(player.x-a.x)*math.abs(player.y-a.y)*math.abs(player.z-a.z)) < (math.abs(player.x-b.x)*math.abs(player.y-b.y)*math.abs(player.z-b.z))
+                    return (math.abs(player.x-a.x)*(math.abs(player.y-a.y)*1.5)*math.abs(player.z-a.z)) < (math.abs(player.x-b.x)*(math.abs(player.y-b.y)*1.5)*math.abs(player.z-b.z))
                 end)
     
                 if targets[1] then
