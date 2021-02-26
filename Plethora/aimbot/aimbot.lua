@@ -51,7 +51,7 @@ parallel.waitForAny(
     
                 --find nearest
                 table.sort(targets, function (a, b)
-                    return (math.abs(player.x-a.x)*(math.abs(player.y-a.y)*1.5)*math.abs(player.z-a.z)) < (math.abs(player.x-b.x)*(math.abs(player.y-b.y)*1.5)*math.abs(player.z-b.z))
+                    return (math.abs(player.x-a.x)*math.abs(player.y-a.y)*math.abs(player.z-a.z)) < (math.abs(player.x-b.x)*math.abs(player.y-b.y)*math.abs(player.z-b.z))
                 end)
     
                 if targets[1] then
