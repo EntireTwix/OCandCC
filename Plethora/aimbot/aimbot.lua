@@ -40,12 +40,12 @@ parallel.waitForAny(
                 local targets = {}
                 local player
                 for _, entity in pairs(temp_detected) do
-                    if entity.name ~= "Item" and entity.name ~= name and entity.name ~= "XPOrb" and entity.name ~= "plethora:laser" then
+                    if entity.name ~= name then
                         if whitelist[entity.name] == nil then
                             --print("enemy "..entity.name)
                             table.insert(targets, modules.getMetaByID(entity.id))
                         end
-                    elseif entity.name == name then
+                    else 
                         player = entity
                     end
                 end
