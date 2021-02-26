@@ -4,5 +4,7 @@
     "plethora:laser" : true,
     "EnderDragon" : true,
     "EnderCrystal" : true,
-    "Villager" : true
+    "Villager" : true,
+    "Arrow" : true,
+    "WitherSkull" : true
 }
