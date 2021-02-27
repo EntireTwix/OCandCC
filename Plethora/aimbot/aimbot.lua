@@ -32,7 +32,9 @@ local function fire(entity)
 end
 
 local firing = false
-print("Press G to toggle firing")
+local drilling = false
+print("Press G to toggle auto-firing")
+print("Press T to toggle drilling")
 
 
 parallel.waitForAny(
@@ -66,6 +68,19 @@ parallel.waitForAny(
             if event == "key" and key == keys.g then
                 firing = not firing 
                 print("\n[firing toggled to "..tostring(firing).."]\n")
+            elseif event == "key" and key == keys.t then
+                drilling = not drilling
+                print("\n[drilling toggled to "..tostring(drilling).."]\n")
+            end
+        end
+    end,
+    function()
+        while true do
+            player = modules.getMetaOwner()
+            if player.isSneaking and drilling == true then
+                modules.fire(player.yaw, player.pitch, 5)
+            else
+                sleep(0)
             end
         end
     end
