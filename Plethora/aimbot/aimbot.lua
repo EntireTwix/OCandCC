@@ -1,4 +1,3 @@
-local json = require("json")
 local modules = peripheral.find("neuralInterface")
 
 if not modules.hasModule("plethora:sensor") then
@@ -7,15 +6,20 @@ end
 if not modules.hasModule("plethora:laser", 0) then
 	error("Must have a laser", 0)
 end
+if not modules.hasModule("plethora:introspection") then
+	error("Must have an introspection module", 0)
+end
 
---filter out self
-print("Enter your Username")
-local name = io.read()
+local player = modules.getMetaOwner()
 
 local whitelist = {}
-local file = fs.open("whitelist.json", "r")
+local file = fs.open("whitelist.txt", "r")
 if file then
-    whitelist = json.decode(file:readAll())
+    local temp = file.readLine()
+    while temp do
+        whitelist[temp] = true
+        temp = file.readLine()
+    end
     file.close() 
 end
 
@@ -28,6 +32,7 @@ local function fire(entity)
 end
 
 local firing = false
+print("Press G to toggle firing")
 
 
 parallel.waitForAny(
@@ -37,15 +42,9 @@ parallel.waitForAny(
                 local temp_detected = modules.sense()
     
                 local targets = {}
-                local player
                 for _, entity in pairs(temp_detected) do
-                    if entity.name ~= name then
-                        if whitelist[entity.name] == nil then
-                            --print("enemy "..entity.name)
-                            table.insert(targets, modules.getMetaByID(entity.id))
-                        end
-                    else 
-                        player = entity
+                    if whitelist[entity.name..' '] == nil and player.id ~= entity.id then
+                        table.insert(targets, modules.getMetaByID(entity.id))
                     end
                 end
     
@@ -66,7 +65,7 @@ parallel.waitForAny(
             local event, key = os.pullEvent()
             if event == "key" and key == keys.g then
                 firing = not firing 
-                print("firing toggled to "..tostring(firing))
+                print("\n[firing toggled to "..tostring(firing).."]\n")
             end
         end
     end
