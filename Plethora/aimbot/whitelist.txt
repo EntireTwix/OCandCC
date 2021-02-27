@@ -7,3 +7,4 @@ Villager
 Arrow 
 WitherSkull 
 Fireball
+Bat
