@@ -9,3 +9,8 @@ this program is a defuse **ressistant** mine. Some of its prevetative measures i
 
 # TurtleScripts
 * an obsidian generator
+
+# Plethora
+a set of scripts for plethora mod
+* aimbot.lua, when toggeled with T, crouching will fire where the player is looking, when toggeled with G aimbot will shoot anyone not on the whitelist
+* drill.lua, pressing control will shoot where the player is looking
